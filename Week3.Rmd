@@ -1,0 +1,32 @@
+---
+title: "Week 3 assigment"
+author: "Samuel"
+date: "December 28, 2018"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+##
+###Quality of the red wine with respect to the alcohol and the volatile acidity
+```{r, message = FALSE}
+library(plotly)
+data <- read.csv("https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv", sep = ";")
+
+#corrplot::corrplot(cor(data))
+
+plot_ly(data, x = ~alcohol, y = ~volatile.acidity, type = "scatter", mode = "markers", color = ~as.factor(quality)) %>% 
+    layout(title = "Principal parameters on red wine quality", 
+           xaxis = list(title = "Alcohol"), 
+           yaxis = list(title = "Volatile acidity"), legend=list(tracegroupgap =30, y=0.9, yanchor="top")) %>% 
+    add_annotations(text="Wine\nquality:", xref="paper", yref="paper",
+                   x=1.02, xanchor="left",
+                   y=0.9, yanchor="bottom", 
+                   legendtitle=TRUE, showarrow=FALSE )
+```
+Source : [https://archive.ics.uci.edu/ml/datasets/Wine+Quality] for red wine
+
+## Conclusion
+The quality (a higher number is better) of the red wine increases with the alcohol and decreases with the volatile acidity
